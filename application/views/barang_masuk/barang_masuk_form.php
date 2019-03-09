@@ -29,7 +29,7 @@
         </div>
         <div class="form-group">
             <label for="int">Harga beli <?php echo form_error('harga') ?></label>
-            <input type="text" class="form-control" name="harga" id="harga_beli" placeholder="harga" value="<?php echo $harga_beli; ?>" />
+            <input type="text" class="form-control" name="harga_beli" id="harga_beli" placeholder="harga" value="<?php echo $harga_beli; ?>" />
         </div>
         <input type="hidden" name="id_barang_masuk" value="<?php echo $id_barang_masuk; ?>" /> 
         <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 

@@ -25,7 +25,7 @@ class Barang_masuk extends CI_Controller
             $config['first_url'] = base_url() . 'barang_masuk/index.html';
         }
 
-        $config['per_page'] = 1;
+        $config['per_page'] = 10;
         $config['page_query_string'] = TRUE;
         $config['total_rows'] = $this->Barang_masuk_model->total_rows($q);
         $barang_masuk = $this->Barang_masuk_model->get_limit_data($config['per_page'], $start, $q);
@@ -87,11 +87,11 @@ class Barang_masuk extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'kode_barang' => $this->input->post('kode_barang',TRUE),
-		'kode_supplier' => $this->input->post('kode_supplier',TRUE),
-		'jumlah_beli' => $this->input->post('jumlah_beli',TRUE),
-		'harga_beli' => $this->input->post('harga_beli',TRUE),
-	    );
+                'kode_barang' => $this->input->post('kode_barang',TRUE),
+                'kode_supplier' => $this->input->post('kode_supplier',TRUE),
+                'jumlah_beli' => $this->input->post('jumlah_beli',TRUE),
+                'harga_beli' => $this->input->post('harga_beli',TRUE),
+            );
 
             $this->Barang_masuk_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');

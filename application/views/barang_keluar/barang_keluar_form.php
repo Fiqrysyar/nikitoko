@@ -18,7 +18,7 @@
         </div>
         <div class="form-group">
             <label for="int">Jumlah jual<?php echo form_error('jumlah_jual') ?></label>
-            <input type="text" class="form-control" name="jumlah" id="jumlah_jual" placeholder="jumlah" value="<?php echo $jumlah_jual; ?>" />
+            <input type="text" class="form-control" name="jumlah_jual" id="jumlah_jual" placeholder="jumlah" value="<?php echo $jumlah_jual; ?>" />
         </div>
         <input type="hidden" name="id_barang_keluar" value="<?php echo $id_barang_keluar; ?>" /> 
         <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
