@@ -47,8 +47,8 @@
             <td width="80px"><?php echo ++$start ?></td>
             <td><?php echo $barang->nama_barang ?></td>
            <td><?php echo $barang->kode_barang ?></td>
-            <td><?php echo $barang->harga_beli ?></td>
-             <td><?php echo $barang->harga_jual ?></td>
+            <td><?php echo "Rp ",number_format($barang->harga_beli,2,",","."); ?></td>
+             <td><?php echo "Rp ",number_format($barang->harga_jual,2,",","."); ?></td>
              <td><?php echo $barang->stok ?></td>
              <td><?php echo $barang->jumlah_beli ?></td>
              <td><?php echo $barang->jumlah_jual ?></td>

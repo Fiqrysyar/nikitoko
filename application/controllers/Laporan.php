@@ -40,7 +40,7 @@ class Laporan extends CI_Controller
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
             'start' => $start,
-            'konten' => 'Laporan/laporanv',
+            'konten' => 'laporan/laporanv',
             'judul' => 'Laporan Barang',
         );
         $this->load->view('v_index', $data);
