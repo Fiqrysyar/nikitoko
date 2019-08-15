@@ -29,17 +29,18 @@ class Laporan extends CI_Controller
         $config['per_page'] = 10;
         $config['page_query_string'] = TRUE;
         $config['total_rows'] = $this->Laporan_model->total_rows($q);
-        $Laporan = $this->Laporan_model->get_limit_data($config['per_page'], $start, $q);
+        $Laporan = $this->Laporan_model->get_laporan();
+        $data['semua_laporan'] = $this->Laporan_model->get_laporan();
 
         $this->load->library('pagination');
         $this->pagination->initialize($config);
 
         $data = array(
             'Laporan_data' => $Laporan,
-            'q' => $q,
+/*            'q' => $q,
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
-            'start' => $start,
+            'start' => $start,*/
             'konten' => 'laporan/laporanv',
             'judul' => 'Laporan Barang',
         );
@@ -47,4 +48,3 @@ class Laporan extends CI_Controller
     }
 
 }
-

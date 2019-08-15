@@ -9,6 +9,7 @@ class Barang_masuk extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Barang_masuk_model');
+        $this->load->model('Barang_model');
         $this->load->library('form_validation');
     }
 
@@ -76,8 +77,16 @@ class Barang_masuk extends CI_Controller
         'konten' => 'barang_masuk/barang_masuk_form',
             'judul' => 'Data Barang Masuk',
 	);
+        $data['semua_barang']= $this->Barang_model->get_barang();
         $this->load->view('v_index', $data);
     }
+
+    public function cari()
+    {
+        $kode_barang=$_GET['kode_barang'];
+        $cari =$this->Barang_masuk_model->cari($kode_barang)->result();
+        echo json_encode($cari);
+    } 
     
     public function create_action() 
     {
@@ -88,6 +97,8 @@ class Barang_masuk extends CI_Controller
         } else {
             $data = array(
                 'kode_barang' => $this->input->post('kode_barang',TRUE),
+                'tanggal' => $this->input->post('tanggal',TRUE),
+                'nama_barang' => $this->input->post('nama_barang',TRUE),
                 'kode_supplier' => $this->input->post('kode_supplier',TRUE),
                 'jumlah_beli' => $this->input->post('jumlah_beli',TRUE),
                 'harga_beli' => $this->input->post('harga_beli',TRUE),
@@ -162,7 +173,6 @@ class Barang_masuk extends CI_Controller
 	$this->form_validation->set_rules('kode_supplier', 'kode supplier', 'trim|required');
 	$this->form_validation->set_rules('jumlah_beli', 'jumlah_beli', 'trim|required');
 	$this->form_validation->set_rules('harga_beli', 'harga_beli', 'trim|required');
-
 	$this->form_validation->set_rules('id_barang_masuk', 'id_barang_masuk', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }

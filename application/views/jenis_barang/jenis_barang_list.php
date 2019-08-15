@@ -1,6 +1,7 @@
 <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
-                <?php echo anchor(site_url('jenis_barang/create'),'Create', 'class="btn btn-primary"'); ?>
+                
+                <a class="btn btn-primary" href="jenis_barang/create">create</a>
             </div> 
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">

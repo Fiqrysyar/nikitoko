@@ -52,6 +52,14 @@ class Barang_masuk_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    function cari($kode_barang){
+        $this->db->from('barang');
+        $this->db->where('kode_barang',$kode_barang);
+        $query= $this->db->get();
+        /*$query= $this->db->get('barang'),array('kode_barang'=>$kode_barang));*/
+        return $query;
+    }
+
     // insert data
     function insert($data)
     {

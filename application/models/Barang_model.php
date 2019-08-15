@@ -15,6 +15,35 @@ class Barang_model extends CI_Model
         parent::__construct();
     }
 
+    function get_barang() {
+        $this->db->from($this->table);
+        $query = $this->db->get();
+
+        return $query;
+    }
+
+    function get_barang_by_kode($id) {
+        $this->db->from($this->table);
+        $this->db->where('kode_barang', $id);
+        $query = $this->db->get();
+
+        return $query;
+    }
+    function get_barang_by_kode_barang($id){
+        $this->db->from($this->table);
+        $this->db->where('kode_barang', $id);
+        $query = $this->db->get();
+
+        return $query;
+    }
+    function get_barang_by_id_merk($id){
+        $this->db->from($this->table);
+        $this->db->where('id_merk', $id);
+        $query = $this->db->get();
+
+        return $query;
+    }
+
     // get all
     function get_all()
     {

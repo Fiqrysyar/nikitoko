@@ -13,7 +13,8 @@
         <h2 style="margin-top:0px">User List</h2>
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
-                <?php echo anchor(site_url('user/create'),'Create', 'class="btn btn-primary"'); ?>
+               
+                <a class="btn btn-primary" href="user/create">create</a>
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -31,7 +32,8 @@
                                 if ($q <> '')
                                 {
                                     ?>
-                                    <a href="<?php echo site_url('user'); ?>" class="btn btn-default">Reset</a>
+                                    
+                <a class="btn btn-primary" href="user/reset">reset</a>
                                     <?php
                                 }
                             ?>

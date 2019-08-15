@@ -8,12 +8,16 @@
             <input type="text" class="form-control" name="nama_supplier" id="nama_supplier" placeholder="Nama Supplier" value="<?php echo $nama_supplier; ?>" />
         </div>
         <div class="form-group">
-            <label for="varchar">Username <?php echo form_error('username') ?></label>
-            <input type="text" class="form-control" name="username" id="nama_supplier" placeholder="Username" value="<?php echo $username; ?>" />
+            <label for="varchar">Alamat <?php echo form_error('alamat') ?></label>
+            <input type="text" class="form-control" name="alamat" id="alamat" placeholder="Alamat" value="<?php echo $alamat; ?>" />
         </div>
         <div class="form-group">
-            <label for="varchar">Password <?php echo form_error('password') ?></label>
-            <input type="text" class="form-control" name="password" id="password" placeholder="Password" value="<?php echo $password; ?>" />
+            <label for="varchar">Nomer Hp <?php echo form_error('nomer_hp') ?></label>
+            <input type="text" class="form-control" name="nomer_hp" id="nomer_hp" placeholder="Nomer Hp" value="<?php echo $nomer_hp; ?>" />
+        </div>
+        <div class="form-group">
+            <label for="varchar">Barang yang dijual <?php echo form_error('barang_jual') ?></label>
+            <input type="text" class="form-control" name="barang_jual" id="barang_jual" placeholder="Barang yang dijual" value="<?php echo $barang_jual; ?>" />
         </div>
         <input type="hidden" name="id_supplier" value="<?php echo $id_supplier; ?>" /> 
         <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 

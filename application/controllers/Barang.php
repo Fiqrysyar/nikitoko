@@ -43,26 +43,95 @@ class Barang extends CI_Controller
             'konten' => 'barang/barang_list',
             'judul' => 'Data Barang',
         );
+        $data['semua_barang']= $this->Barang_model->get_barang();
         $this->load->view('v_index', $data);
     }
 
+    public function barang_by_kode($id)
+    {
+        $q = urldecode($this->input->get('q', TRUE));
+        $start = intval($this->input->get('start'));
+        
+        if ($q <> '') {
+            $config['base_url'] = base_url() . 'barang/index.html?q=' . urlencode($q);
+            $config['first_url'] = base_url() . 'barang/index.html?q=' . urlencode($q);
+        } else {
+            $config['base_url'] = base_url() . 'barang/index.html';
+            $config['first_url'] = base_url() . 'barang/index.html';
+        }
+
+        $config['per_page'] = 10;
+        $config['page_query_string'] = TRUE;
+        $config['total_rows'] = $this->Barang_model->total_rows($q);
+        $barang = $this->Barang_model->get_limit_data($config['per_page'], $start, $q);
+
+        $this->load->library('pagination');
+        $this->pagination->initialize($config);
+
+        $data = array(
+            'barang_data' => $barang,
+            'q' => $q,
+            'pagination' => $this->pagination->create_links(),
+            'total_rows' => $config['total_rows'],
+            'start' => $start,
+            'konten' => 'barang/barang_list',
+            'judul' => 'Data Barang',
+        );
+        $data['semua_barang']= $this->Barang_model->get_barang_by_kode($id);
+        $this->load->view('v_index', $data);
+    }
+
+    public function barang_by_merk($id)
+    {
+        $q = urldecode($this->input->get('q', TRUE));
+        $start = intval($this->input->get('start'));
+        
+        if ($q <> '') {
+            $config['base_url'] = base_url() . 'barang/index.html?q=' . urlencode($q);
+            $config['first_url'] = base_url() . 'barang/index.html?q=' . urlencode($q);
+        } else {
+            $config['base_url'] = base_url() . 'barang/index.html';
+            $config['first_url'] = base_url() . 'barang/index.html';
+        }
+
+        $config['per_page'] = 10;
+        $config['page_query_string'] = TRUE;
+        $config['total_rows'] = $this->Barang_model->total_rows($q);
+        $barang = $this->Barang_model->get_limit_data($config['per_page'], $start, $q);
+
+        $this->load->library('pagination');
+        $this->pagination->initialize($config);
+
+        $data = array(
+            'barang_data' => $barang,
+            'q' => $q,
+            'pagination' => $this->pagination->create_links(),
+            'total_rows' => $config['total_rows'],
+            'start' => $start,
+            'konten' => 'barang/barang_list',
+            'judul' => 'Data Barang',
+        );
+        $data['semua_barang']= $this->Barang_model->get_barang_by_id_merk($id);
+        $this->load->view('v_index', $data);
+    }
     public function read($id) 
     {
         $row = $this->Barang_model->get_by_id($id);
         if ($row) {
             $data = array(
-		'id_barang' => $row->id_barang,
-		'kode_barang' => $row->kode_barang,
-		'nama_barang' => $row->nama_barang,
-		'harga_jual' => $row->harga_jual,
+        'id_barang' => $row->id_barang,
+        'kode_barang' => $row->kode_barang,
+        'nama_barang' => $row->nama_barang,
+        'harga_jual' => $row->harga_jual,
         'harga_beli' => $row->harga_beli,
-		'stok' => $row->stok,
-	    );
+        'stok' => $row->stok,
+        );
             $this->load->view('barang/barang_read', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('barang'));
         }
+        
     }
 
     public function create() 
@@ -70,18 +139,18 @@ class Barang extends CI_Controller
         $data = array(
             'button' => 'Create',
             'action' => site_url('barang/create_action'),
-	    'id_barang' => set_value('id_barang'),
-	    'kode_barang' => $this->No_urut->buat_kode_barang(),
-	    'nama_barang' => set_value('nama_barang'),
-	    'harga_jual' => set_value('harga_jual'),
-        'harga_beli' => set_value('harga_beli'),
+        'id_barang' => set_value('id_barang'),
+        'kode_barang' => $this->No_urut->buat_kode_barang(),
+        'nama_barang' => set_value('nama_barang'),
+        // 'harga_jual' => set_value('harga_jual'),
+     //    'harga_beli' => set_value('harga_beli'),
         'stok' => set_value('stok'),
         'id_jenis' => set_value('id_jenis'),
         'id_merk' => set_value('id_merk'),
-	    'kode_supplier' => set_value('kode_supplier'),
+        // 'kode_supplier' => set_value('kode_supplier'),
         'konten' => 'barang/barang_form',
             'judul' => 'Data Barang',
-	);
+    );
         $this->load->view('v_index', $data);
     }
     
@@ -107,16 +176,17 @@ class Barang extends CI_Controller
         $dfile = $result['gambar']['file_name'];
 
             $data = array(
-		'kode_barang' => $this->input->post('kode_barang',TRUE),
-		'nama_barang' => $this->input->post('nama_barang',TRUE),
-		'harga_jual' => $this->input->post('harga_jual',TRUE),
-        'harga_beli' => $this->input->post('harga_beli',TRUE),
+        'kode_barang' => $this->input->post('kode_barang',TRUE),
+        'nama_barang' => $this->input->post('nama_barang',TRUE),
+        'tanggal' => $this->input->post('tanggal',TRUE),
+  //       'harga_beli' => $this->input->post('harga_beli',TRUE),
         'stok' => $this->input->post('stok',TRUE),
         'id_jenis' => $this->input->post('id_jenis',TRUE),
         'id_merk' => $this->input->post('id_merk',TRUE),
-        'kode_supplier' => $this->input->post('kode_supplier',TRUE),
-		'foto_barang' => $dfile,
-	    );
+        'harga' => $this->input->post('harga',TRUE),
+        // 'kode_supplier' => $this->input->post('kode_supplier',TRUE),
+        'foto_barang' => $dfile,
+        );
 
             $this->Barang_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
@@ -132,18 +202,18 @@ class Barang extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('barang/update_action'),
-		'id_barang' => set_value('id_barang', $row->id_barang),
-		'kode_barang' => set_value('kode_barang', $row->kode_barang),
-		'nama_barang' => set_value('nama_barang', $row->nama_barang),
-		'harga_jual' => set_value('harga_jual', $row->harga_jual),
-        'harga_beli' => set_value('harga_beli', $row->harga_beli),
+        'id_barang' => set_value('id_barang', $row->id_barang),
+        'kode_barang' => set_value('kode_barang', $row->kode_barang),
+        'nama_barang' => set_value('nama_barang', $row->nama_barang),
+        // 'harga_jual' => set_value('harga_jual', $row->harga_jual),
+  //       'harga_beli' => set_value('harga_beli', $row->harga_beli),
         'stok' => set_value('stok', $row->stok),
         'id_jenis' => set_value('id_jenis', $row->id_jenis),
         'id_merk' => set_value('id_merk', $row->id_merk),
-		'kode_supplier' => set_value('kode_supplier', $row->kode_supplier),
+        // 'kode_supplier' => set_value('kode_supplier', $row->kode_supplier),
         'konten' => 'barang/barang_form',
             'judul' => 'Data Barang',
-	    );
+        );
             $this->load->view('v_index', $data);
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
@@ -163,12 +233,13 @@ class Barang extends CI_Controller
             $data = array(
         'kode_barang' => $this->input->post('kode_barang',TRUE),
         'nama_barang' => $this->input->post('nama_barang',TRUE),
-        'harga_jual' => $this->input->post('harga_jual',TRUE),
-        'harga_beli' => $this->input->post('harga_beli',TRUE),
+        // 'harga_jual' => $this->input->post('harga_jual',TRUE),
+        // 'harga_beli' => $this->input->post('harga_beli',TRUE),
         'stok' => $this->input->post('stok',TRUE),
         'id_jenis' => $this->input->post('id_jenis',TRUE),
         'id_merk' => $this->input->post('id_merk',TRUE),
-        'kode_supplier' => $this->input->post('kode_supplier',TRUE),
+        'harga' => $this->input->post('harga',TRUE),
+        // 'kode_supplier' => $this->input->post('kode_supplier',TRUE),
         );
 
             $this->Barang_model->update($this->input->post('id_barang', TRUE), $data);
@@ -193,12 +264,13 @@ class Barang extends CI_Controller
              $data = array(
         'kode_barang' => $this->input->post('kode_barang',TRUE),
         'nama_barang' => $this->input->post('nama_barang',TRUE),
-        'harga_jual' => $this->input->post('harga_jual',TRUE),
-        'harga_beli' => $this->input->post('harga_beli',TRUE),
+        // 'harga_jual' => $this->input->post('harga_jual',TRUE),
+        // 'harga_beli' => $this->input->post('harga_beli',TRUE),
         'stok' => $this->input->post('stok',TRUE),
         'id_jenis' => $this->input->post('id_jenis',TRUE),
         'id_merk' => $this->input->post('id_merk',TRUE),
-        'kode_supplier' => $this->input->post('kode_supplier',TRUE),
+        'harga' => $this->input->post('harga',TRUE),
+        // 'kode_supplier' => $this->input->post('kode_supplier',TRUE),
         'foto_barang' => $dfile,
         );
 
@@ -227,14 +299,14 @@ class Barang extends CI_Controller
 
     public function _rules() 
     {
-	$this->form_validation->set_rules('kode_barang', 'kode barang', 'trim|required');
-	$this->form_validation->set_rules('nama_barang', 'nama barang', 'trim|required');
-	$this->form_validation->set_rules('harga_jual', 'harga_jual', 'trim|required');
-    $this->form_validation->set_rules('harga_beli', 'harga_beli', 'trim|required');
-	$this->form_validation->set_rules('stok', 'stok', 'trim|required');
+    $this->form_validation->set_rules('kode_barang', 'kode barang', 'trim|required');
+    $this->form_validation->set_rules('nama_barang', 'nama barang', 'trim|required');
+    // $this->form_validation->set_rules('harga_jual', 'harga_jual', 'trim|required');
+ //    $this->form_validation->set_rules('harga_beli', 'harga_beli', 'trim|required');
+    $this->form_validation->set_rules('stok', 'stok', 'trim|required');
 
-	$this->form_validation->set_rules('id_barang', 'id_barang', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+    $this->form_validation->set_rules('id_barang', 'id_barang', 'trim');
+    $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
 }

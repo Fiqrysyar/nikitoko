@@ -15,8 +15,16 @@
     <link href="assets/template/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="assets/template/css/style.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/datatables.net-bs/css/dataTables.bootstrap.min.css">
     <!-- You can change the theme colors from here -->
     <link href="assets/template/css/colors/blue.css" id="theme" rel="stylesheet">
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" id="theme" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" id="theme" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css"> -->
+    
+  
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 </head>
 
@@ -46,14 +54,14 @@
                         <b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                             <!-- Dark Logo icon -->
-                            <img src="assets/template/images/logo-icon.png" alt="homepage" class="dark-logo" />
+                            <img src="assets/template/images/logo-icon1.png" alt="homepage" class="dark-logo" />
                             
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span>
                          <!-- dark Logo text -->
-                         <img src="assets/template/images/logo-text.png" alt="homepage" class="dark-logo" />
+                         <img src="assets/template/images/logo-text1.png" alt="homepage" class="dark-logo" />
                          </span> </a>
                 </div>
                 <!-- ============================================================== -->
@@ -104,11 +112,9 @@
                         <li>
                             <a href="<?php echo base_url(barang);?>" class="waves-effect"><i class="fa fa-user m-r-10" aria-hidden="true"></i>Barang</a>
                         </li>
+                        
                         <li>
-                            <a href="<?php echo base_url(jenis_barang);?>" class="waves-effect"><i class="fa fa-table m-r-10" aria-hidden="true"></i>Jenis Barang</a>
-                        </li>
-                        <li>
-                            <a href="<?php echo base_url(merk_barang);?>" class="waves-effect"><i class="fa fa-font m-r-10" aria-hidden="true"></i>Merk Barang</a>
+                            <a href="<?php echo base_url(supplier);?>" class="waves-effect"><i class="fa fa-info-circle m-r-10" aria-hidden="true"></i>Supplier</a>
                         </li>
                         <li>
                             <a href="<?php echo base_url(barang_masuk);?>" class="waves-effect"><i class="fa fa-globe m-r-10" aria-hidden="true"></i>Transaksi Barang Masuk</a>
@@ -118,13 +124,19 @@
                         </li>
                         <li>
                             <a href="<?php echo base_url(laporan);?>" class="waves-effect"><i class="fa fa-info-circle m-r-10" aria-hidden="true"></i>Laporan</a>
+                        </li><hr/>
+
+                        <li>
+                            <a href="<?php echo base_url(jenis_barang);?>" class="waves-effect"><i class="fa fa-table m-r-10" aria-hidden="true"></i>Jenis Barang</a>
                         </li>
-                         <li>
-                            <a href="<?php echo base_url(laporan);?>" class="waves-effect"><i class="fa fa-info-circle m-r-10" aria-hidden="true"></i>Laporan Penjualan</a>
+                        <li>
+                            <a href="<?php echo base_url(merk_barang);?>" class="waves-effect"><i class="fa fa-font m-r-10" aria-hidden="true"></i>Merk Barang</a>
                         </li>
+                        
                         <li>
                             <a href="<?php echo base_url(users);?>" class="waves-effect"><i class="fa fa-info-circle m-r-10" aria-hidden="true"></i>Manajemen User</a>
                         </li>
+                         
                     </ul>
                     <div class="text-center m-t-30">
                            <a href="<?php echo base_url()?>app/logout" class="btn btn-danger"><i class="glyphicon glyphicon-share"></i>Logout </a>
@@ -136,7 +148,10 @@
                             <a href="<?php echo base_url();?>" class="waves-effect"><i class="fa fa-clock-o m-r-10" aria-hidden="true"></i>Dashboard</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url(barang_keluar);?>" class="waves-effect"><i class="fa fa-columns m-r-10" aria-hidden="true"></i>Transaksi Penjualan</a>
+                            <a href="<?php echo base_url("barang_keluar/create");?>" class="waves-effect"><i class="fa fa-columns m-r-10" aria-hidden="true"></i>Transaksi Penjualan</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url(barang_keluar);?>" class="waves-effect"><i class="fa fa-clock-o m-r-10" aria-hidden="true"></i>Hystori</a>
                         </li>
                         <li>
                     </ul>
@@ -237,8 +252,20 @@
     <script src="assets/template/plugins/styleswitcher/jQuery.style.switcher.js"></script>
         <?php //include 'config/footer.php'; ?>
     <script src="assets/bootstrap-datepicker.js"></script>
+
+    <!-- <script src="assets/jquery/dist/jquery.min.js"></script> -->
+<!-- Bootstrap 3.3.7 -->
+    <script src="assets/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script src="assets/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="assets/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
   
-    <script type="text/javascript">
+    
+<!-- <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script> -->
+
+<script type="text/javascript">
       $('.tgl').datepicker({
                 format: 'yyyy-mm-dd',
                 autoclose: true,
@@ -249,6 +276,13 @@
                 language: 'id'
             });
   </script>
+
+<script>
+  $(function () {
+    $('#example2').DataTable()
+
+  })
+</script>
 
 </body>
 

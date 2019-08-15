@@ -9,6 +9,7 @@ class Barang_keluar extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Barang_keluar_model');
+        $this->load->model('Barang_model');
         $this->load->library('form_validation');
     }
 
@@ -28,7 +29,8 @@ class Barang_keluar extends CI_Controller
         $config['per_page'] = 10;
         $config['page_query_string'] = TRUE;
         $config['total_rows'] = $this->Barang_keluar_model->total_rows($q);
-        $barang_keluar = $this->Barang_keluar_model->get_limit_data($config['per_page'], $start, $q);
+        /*$barang_keluar = $this->Barang_keluar_model->get_limit_data($config['per_page'], $start, $q);*/
+        $barang_keluar = $this->Barang_keluar_model->get_barang_keluar();
 
         $this->load->library('pagination');
         $this->pagination->initialize($config);
@@ -51,9 +53,13 @@ class Barang_keluar extends CI_Controller
         if ($row) {
             $data = array(
 		'id_barang_keluar' => $row->id_barang_keluar,
+        'nama_barang' => $row->nama_barang,
 		'kode_barang' => $row->kode_barang,
-		'tgl_keluar' => $row->tgl_keluar,
+		'tanggal' => $row->tanggal,
 		'jumlah_jual' => $row->jumlah_jual,
+        'jumlah_jual' => $row->jumlah_jual,
+        
+
 	    );
             $this->load->view('barang_keluar/barang_keluar_read', $data);
         } else {
@@ -69,13 +75,23 @@ class Barang_keluar extends CI_Controller
             'action' => site_url('barang_keluar/create_action'),
 	    'id_barang_keluar' => set_value('id_barang_keluar'),
 	    'kode_barang' => set_value('kode_barang'),
-	    'tgl_keluar' => set_value('tgl_keluar'),
+        'nama_barang' => set_value('nama_barang'),
+
+	   
 	    'jumlah_jual' => set_value('jumlah_jual'),
         'konten' => 'barang_keluar/barang_keluar_form',
             'judul' => 'Data Barang Keluar',
 	);
+        $data['semua_barang']= $this->Barang_model->get_barang();
         $this->load->view('v_index', $data);
     }
+
+    public function cari()
+    {
+        $kode_barang=$_GET['kode_barang'];
+        $cari =$this->Barang_keluar_model->cari($kode_barang)->result();
+        echo json_encode($cari);
+    } 
     
     public function create_action() 
     {
@@ -86,7 +102,8 @@ class Barang_keluar extends CI_Controller
         } else {
             $data = array(
 		'kode_barang' => $this->input->post('kode_barang',TRUE),
-		'tgl_keluar' => $this->input->post('tgl_keluar',TRUE),
+        'nama_barang' => $this->input->post('nama_barang',TRUE),
+		
 		'jumlah_jual' => $this->input->post('jumlah_jual',TRUE),
 	    );
 
@@ -102,14 +119,14 @@ class Barang_keluar extends CI_Controller
 
         if ($row) {
             $data = array(
-                'button' => 'Update',
-                'action' => site_url('barang_keluar/update_action'),
+        'button' => 'Update',
+        'action' => site_url('barang_keluar/update_action'),
 		'id_barang_keluar' => set_value('id_barang_keluar', $row->id_barang_keluar),
 		'kode_barang' => set_value('kode_barang', $row->kode_barang),
 		'tgl_keluar' => set_value('tgl_keluar', $row->tgl_keluar),
 		'jumlah_jual' => set_value('jumlah_jual', $row->jumlah_jual),
         'konten' => 'barang_keluar/barang_keluar_form',
-            'judul' => 'Data Barang Keluar',
+        'judul' => 'Data Barang Keluar',
 	    );
             $this->load->view('v_index', $data);
         } else {
@@ -128,7 +145,7 @@ class Barang_keluar extends CI_Controller
             $data = array(
         'kode_barang' => $this->input->post('kode_barang',TRUE),
         'nama_barang' => $this->input->post('nama_barang',TRUE),
-        'tanggal' => $this->input->post('tanggal',TRUE),
+        
         'jumlah_item' => $this->input->post('jumlah_item',TRUE),
         'harga' => $this->input->post('harga',TRUE),
 

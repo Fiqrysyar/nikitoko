@@ -45,6 +45,17 @@ class Supplier extends CI_Controller
         $this->load->view('v_index', $data);
     }
 
+    function get_supplier_by_id($id)
+    {
+        $data = array(
+            'supplier_data' =>$this->Supplier_model->get_by_kode($id),
+            'konten' => 'supplier/supplier_list',
+            'judul' => 'Data Supplier',
+
+        );
+        $this->load->view('v_index', $data);
+    }
+
     public function read($id) 
     {
         $row = $this->Supplier_model->get_by_id($id);
@@ -53,6 +64,11 @@ class Supplier extends CI_Controller
 		'id_supplier' => $row->id_supplier,
 		'kode_supplier' => $row->kode_supplier,
 		'nama_supplier' => $row->nama_supplier,
+        'alamat' => $row->alamat,
+        'nomer_hp' => $row->nomer_hp,
+        'barang_jual' => $row->barang_jual,
+
+
 	    );
             $this->load->view('supplier/supplier_read', $data);
         } else {
@@ -69,8 +85,9 @@ class Supplier extends CI_Controller
 	    'id_supplier' => set_value('id_supplier'),
 	    'kode_supplier' => set_value('kode_supplier'),
         'nama_supplier' => set_value('nama_supplier'),
-        'username' => set_value('username'),
-	    'password' => set_value('password'),
+        'alamat' => set_value('alamat'),
+	    'nomer_hp' => set_value('nomer_hp'),
+        'barang_jual' => set_value('barang_jual'),
         'konten' => 'supplier/supplier_form',
             'judul' => 'Data Supplier',
 	);
@@ -87,8 +104,9 @@ class Supplier extends CI_Controller
             $data = array(
 		'kode_supplier' => $this->input->post('kode_supplier',TRUE),
         'nama_supplier' => $this->input->post('nama_supplier',TRUE),
-        'username' => $this->input->post('username',TRUE),
-		'password' => $this->input->post('password',TRUE),
+        'alamat' => $this->input->post('alamat',TRUE),
+		'nomer_hp' => $this->input->post('nomer_hp',TRUE),
+        'barang_jual' => $this->input->post('barang_jual',TRUE),
 	    );
 
             $this->Supplier_model->insert($data);
@@ -108,8 +126,9 @@ class Supplier extends CI_Controller
 		'id_supplier' => set_value('id_supplier', $row->id_supplier),
 		'kode_supplier' => set_value('kode_supplier', $row->kode_supplier),
         'nama_supplier' => set_value('nama_supplier', $row->nama_supplier),
-        'username' => set_value('username', $row->username),
-		'password' => set_value('password', $row->password),
+        'alamat' => set_value('alamat', $row->alamat),
+		'nomer_hp' => set_value('nomer_hp', $row->nomer_hp),
+        'barang_jual' => set_value('barang_jual', $row->barang_jual),
         'konten' => 'supplier/supplier_form',
             'judul' => 'Data Supplier',
 	    );
@@ -130,8 +149,9 @@ class Supplier extends CI_Controller
             $data = array(
 		'kode_supplier' => $this->input->post('kode_supplier',TRUE),
         'nama_supplier' => $this->input->post('nama_supplier',TRUE),
-        'username' => $this->input->post('username',TRUE),
-		'password' => $this->input->post('password',TRUE),
+        'alamat' => $this->input->post('alamat',TRUE),
+		'nomer_hp' => $this->input->post('nomer_hp',TRUE),
+        'barang_jual' => $this->input->post('barang_jual',TRUE),
 	    );
 
             $this->Supplier_model->update($this->input->post('id_supplier', TRUE), $data);
@@ -158,8 +178,10 @@ class Supplier extends CI_Controller
     {
 	$this->form_validation->set_rules('kode_supplier', 'kode supplier', 'trim|required');
     $this->form_validation->set_rules('nama_supplier', 'nama supplier', 'trim|required');
-    $this->form_validation->set_rules('username', 'Username', 'trim|required');
-	$this->form_validation->set_rules('password', 'Password', 'trim|required');
+    $this->form_validation->set_rules('alamat', 'alamat', 'trim|required');
+	$this->form_validation->set_rules('nomer_hp', 'nomer_hp', 'trim|required');
+    $this->form_validation->set_rules('barang_jual', 'barang_jual', 'trim|required');
+
 
 	$this->form_validation->set_rules('id_supplier', 'id_supplier', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');

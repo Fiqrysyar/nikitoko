@@ -1,6 +1,7 @@
 <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
-                <?php echo anchor(site_url('merk_barang/create'),'Create', 'class="btn btn-primary"'); ?>
+                
+                <a class="btn btn-primary" href="merk_barang/create">create</a>
             </div> 
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -39,7 +40,7 @@
                 ?>
                 <tr>
             <td width="80px"><?php echo ++$start ?></td>
-            <td><?php echo $merk_barang->merk_barang ?></td>
+            <td><a href="<?= base_url()."Barang/barang_by_merk/".$merk_barang->id_merk ?>"><?php echo $merk_barang->merk_barang ?></a></td>
             <td style="text-align:center" width="200px">
                 <?php 
                 echo anchor(site_url('merk_barang/update/'.$merk_barang->id_merk),'Update'); 

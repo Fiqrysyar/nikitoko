@@ -12,6 +12,14 @@
             <input type="file" class="form-control" name="foto_barang" />
         </div>
         <div class="form-group">
+            <label for="varchar">Tanggal </label>
+            <input type="date" class="form-control" name="tanggal" id="tanggal" placeholder="tanggal">
+        </div>
+        <div class="form-group">
+            <label for="varchar">Harga </label>
+            <input type="number" class="form-control" name="harga" id="harga" placeholder="harga">
+        </div>
+        <div class="form-group">
             <label for="int">Jenis Barang </label>
             <select name="id_jenis" class="form-control">
                 <option value="<?php echo $id_jenis ?>"><?php echo $id_jenis ?></option>
@@ -36,20 +44,6 @@
             <?php } ?>
             </select>
         </div>
-
-        <!-- <div class="form-group">
-            <label for="int">Supplier </label>
-            <select name="kode_supplier" class="form-control">
-                <option value="<?php echo $kode_supplier ?>"><?php echo $kode_supplier ?></option>
-                <?php 
-                $sql = $this->db->get('supplier');
-                foreach ($sql->result() as $row) {
-                 ?>
-                <option value="<?php echo $row->kode_supplier ?>"><?php echo $row->nama_supplier ?></option>
-            <?php } ?>
-            </select>
-        </div> -->
-
         <div class="form-group">
             <label for="int">Stok <?php echo form_error('stok') ?></label>
             <input type="text" class="form-control" name="stok" id="stok" placeholder="Stok" value="<?php echo $stok; ?>" />

@@ -43,7 +43,7 @@ class App extends CI_Controller {
 			$username = $this->input->post('username');
 			$password = $this->input->post('password');
 			$cek_user = $this->db->query("SELECT * FROM users WHERE username='$username' and password='$password' ");
-			$cek_supplier = $this->db->query("SELECT * FROM supplier WHERE username='$username' and password='$password'");
+			$cek_supplier = $this->db->query("SELECT * FROM users WHERE username='$username' and password='$password'");
 			if ($cek_user->num_rows() == 1) {
 				foreach ($cek_user->result() as $row) {
 					$sess_data['id_user'] = $row->id_user;

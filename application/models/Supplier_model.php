@@ -28,12 +28,27 @@ class Supplier_model extends CI_Model
         $this->db->where($this->id, $id);
         return $this->db->get($this->table)->row();
     }
+
+    // get data by id
+    function get_by_kode($id)
+    {
+        $this->db->from($this->table);
+        $this->db->where('kode_supplier', $id);
+        $query= $this->db->get();
+
+        return $query->result();
+    }
     
     // get total rows
     function total_rows($q = NULL) {
         $this->db->like('id_supplier', $q);
 	$this->db->or_like('kode_supplier', $q);
 	$this->db->or_like('nama_supplier', $q);
+    $this->db->or_like('alamat', $q);
+    $this->db->or_like('nomer_hp', $q);
+    $this->db->or_like('barang_jual', $q);
+
+
 	$this->db->from($this->table);
         return $this->db->count_all_results();
     }
@@ -44,6 +59,11 @@ class Supplier_model extends CI_Model
         $this->db->like('id_supplier', $q);
 	$this->db->or_like('kode_supplier', $q);
 	$this->db->or_like('nama_supplier', $q);
+    $this->db->or_like('alamat', $q);
+    $this->db->or_like('nomer_hp', $q);
+    $this->db->or_like('barang_jual', $q);
+
+
 	$this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }

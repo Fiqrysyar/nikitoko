@@ -16,7 +16,7 @@
       <div class="row justify-content-md-center h-100">
         <div class="card-wrapper">
           <div class="brand">
-            <img src="assets/login/img/logo.jpg">
+            <img src="assets/login/img/logo2.jpg">
           </div>
           <div class="card fat">
             <div class="card-body">
@@ -53,7 +53,7 @@
             </div>
           </div>
           <div class="footer">
-            Copyright &copy; Nikitoko.com 2019
+            Copyright &copy; Nikitoko.com 2017
           </div>
         </div>
       </div>

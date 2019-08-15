@@ -9,7 +9,7 @@
             </div>
             <div class="col-md-1 text-right">
             </div>
-            <div class="col-md-3 text-right">
+<!--             <div class="col-md-3 text-right">
                 <form action="<?php echo site_url('supplier/index'); ?>" class="form-inline" method="get">
                     <div class="input-group">
                         <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
@@ -26,15 +26,24 @@
                         </span>
                     </div>
                 </form>
-            </div>
+            </div> -->
         </div>
-        <table class="table table-bordered" style="margin-bottom: 10px">
+        <table id="example2" class="table table-bordered" style="margin-bottom: 10px">
+            <thead>
             <tr>
                 <th>No</th>
         <th>Kode Supplier</th>
         <th>Nama Supplier</th>
+        <th>Alamat</th>
+        <th>Nomer HP</th>
+        <th>Barang yang dijual</th>
         <th>Action</th>
-            </tr><?php
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <?php
             foreach ($supplier_data as $supplier)
             {
                 ?>
@@ -42,6 +51,10 @@
             <td width="80px"><?php echo ++$start ?></td>
             <td><?php echo $supplier->kode_supplier ?></td>
             <td><?php echo $supplier->nama_supplier ?></td>
+            <td><?php echo $supplier->alamat ?></td>
+            <td><?php echo $supplier->nomer_hp ?></td>
+            <td><?php echo $supplier->barang_jual ?></td>
+
             <td style="text-align:center" width="200px">
                 <?php 
                 echo anchor(site_url('supplier/update/'.$supplier->id_supplier),'Update'); 
@@ -53,12 +66,13 @@
                 <?php
             }
             ?>
+        </tbody>
         </table>
-        <div class="row">
+<!--         <div class="row">
             <div class="col-md-6">
                 <a href="#" class="btn btn-primary">Total Record : <?php echo $total_rows ?></a>
         </div>
             <div class="col-md-6 text-right">
                 <?php echo $pagination ?>
             </div>
-        </div>
+        </div> -->

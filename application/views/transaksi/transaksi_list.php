@@ -32,6 +32,7 @@
             <tr>
                 <th>No</th>
         <th>Kode Barang</th>
+        <th>Nama Barang</th>
         <th>Tgl Keluar</th>
         <th>Jumlah jual</th>
         <th>Action</th>
@@ -42,6 +43,7 @@
                 <tr>
             <td width="80px"><?php echo ++$start ?></td>
             <td><?php echo $barang_keluar->kode_barang ?></td>
+            <td><?php echo $barang_keluar->nama_barang ?></td>
             <td><?php echo $barang_keluar->tgl_keluar ?></td>
             <td><?php echo $barang_keluar->jumlah_jual ?></td>
             <td style="text-align:center" width="200px">

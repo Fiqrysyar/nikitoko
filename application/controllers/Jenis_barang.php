@@ -87,7 +87,7 @@ class Jenis_barang extends CI_Controller
 
             $this->Jenis_barang_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('jenis_barang'));
+            redirect('jenis_barang');
         }
     }
     

@@ -14,6 +14,9 @@
         <table class="table">
 	    <tr><td>Kode Supplier</td><td><?php echo $kode_supplier; ?></td></tr>
 	    <tr><td>Nama Supplier</td><td><?php echo $nama_supplier; ?></td></tr>
+        <tr><td>Alamat</td><td><?php echo $alamat; ?></td></tr>
+        <tr><td>Nomer hp</td><td><?php echo $nomer_hp; ?></td></tr>
+        <tr><td>Barang yang dijual</td><td><?php echo $barang_jual; ?></td></tr>
 	    <tr><td></td><td><a href="<?php echo site_url('supplier') ?>" class="btn btn-default">Cancel</a></td></tr>
 	</table>
         </body>

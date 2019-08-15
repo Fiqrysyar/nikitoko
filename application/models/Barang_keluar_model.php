@@ -15,6 +15,14 @@ class Barang_keluar_model extends CI_Model
         parent::__construct();
     }
 
+    function cari($kode_barang){
+        $this->db->from('barang');
+        $this->db->where('kode_barang',$kode_barang);
+        $query= $this->db->get();
+        /*$query= $this->db->get('barang'),array('kode_barang'=>$kode_barang));*/
+        return $query;
+    }
+
     // get all
     function get_all()
     {
@@ -31,8 +39,9 @@ class Barang_keluar_model extends CI_Model
     
     // get total rows
     function total_rows($q = NULL) {
-        $this->db->like('id_barang_keluar', $q);
+    $this->db->like('id_barang_keluar', $q);
 	$this->db->or_like('kode_barang', $q);
+    $this->db->or_like('kode_barang', $q);
 	$this->db->or_like('tgl_keluar', $q);
 	$this->db->or_like('jumlah_jual', $q);
 	$this->db->from($this->table);
@@ -40,14 +49,23 @@ class Barang_keluar_model extends CI_Model
     }
 
     // get data with limit and search
-    function get_limit_data($limit, $start = 0, $q = NULL) {
-        $this->db->order_by($this->id, $this->order);
-        $this->db->like('id_barang_keluar', $q);
+    /*function get_limit_data($limit, $start = 0, $q = NULL) {
+    $this->db->order_by($this->id, $this->order);
+    $this->db->like('id_barang_keluar', $q);
 	$this->db->or_like('kode_barang', $q);
+    $this->db->or_like('nama_barang', $q);
 	$this->db->or_like('tgl_keluar', $q);
 	$this->db->or_like('jumlah_jual', $q);
 	$this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
+    }*/
+
+    function get_barang_keluar() {
+
+        $this->db->from($this->table);
+        $this->db->join('barang', 'barang.kode_barang= barang_keluar.kode_barang');
+        $query= $this->db->get();
+        return $query->result();
     }
 
     // insert data
